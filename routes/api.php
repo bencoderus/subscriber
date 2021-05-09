@@ -1,8 +1,6 @@
 <?php
 
 use App\Http\Controllers\TopicController;
-use App\Models\Topic;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', fn () => response()->json(['status' => true, 'message' => 'Welcome to the notification system.'], 200));
+Route::get('/', function () {
+    return response()->json(['status' => true, 'message' => 'Subscribers version 1.0.0'], 200);
+});
 
 Route::post('/subscribe/{topic:slug}', [TopicController::class, 'subscribe'])->name('subscribe');
 Route::post('/publish/{topic:slug}', [TopicController::class, 'publish'])->name('publish');

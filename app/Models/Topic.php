@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Topic extends Model
 {
@@ -11,17 +12,17 @@ class Topic extends Model
 
     protected $guarded = ['id'];
 
-    public function subscriptions()
+    public function subscriptions(): hasMany
     {
         return $this->hasMany(Subscription::class);
     }
 
-    public function publishedMessages()
+    public function publishedMessages(): hasMany
     {
         return $this->hasMany(PublishedMessage::class);
     }
 
-    public function publishedLogs()
+    public function publishedLogs(): hasMany
     {
         return $this->hasMany(PublishedLog::class);
     }

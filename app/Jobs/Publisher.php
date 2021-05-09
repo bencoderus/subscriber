@@ -61,9 +61,9 @@ class Publisher implements ShouldQueue
     {
         $topic = $this->createPublishedLogsForSubscribers($this->topic, $this->message);
 
-        $webhooksSent = $this->sendWebhookToSubscribers($topic);
+        $sendingCompleted = $this->sendWebhookToSubscribers($topic);
 
-        if (!$webhooksSent) {
+        if (! $sendingCompleted) {
             $this->retryWebhook();
         }
     }
@@ -108,7 +108,7 @@ class Publisher implements ShouldQueue
             ->where('has_received', false)
             ->get()->lazy();
 
-        $webhooksDispatched = true;
+        $sendingCompleted = true;
 
         foreach ($webhooks as $webhook) {
             try {
@@ -120,18 +120,18 @@ class Publisher implements ShouldQueue
                 if ($statusCode >= 200 && $statusCode <= 205) {
                     $webhook->update(['has_received' => true, 'received_at' => now()]);
                 } else {
-                    $webhooksDispatched = false;
+                    $sendingCompleted = false;
                 }
             } catch (Exception $exception) {
                 report($exception);
 
-                $webhooksDispatched = false;
+                $sendingCompleted = false;
 
                 continue;
             }
         }
 
-        return $webhooksDispatched;
+        return $sendingCompleted;
     }
 
     /**

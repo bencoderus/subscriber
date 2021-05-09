@@ -30,7 +30,7 @@ trait HandleApiResponse
      *
      * @return array
      */
-    public function prepareApiResponse(bool $status, string $message, $data = null): array
+    private function prepareApiResponse(bool $status, string $message, $data = null): array
     {
         $responseData = ['status' => $status, 'message' => $message];
 

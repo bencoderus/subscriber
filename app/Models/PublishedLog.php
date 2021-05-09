@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class PublishedLog extends Model
 {
@@ -15,17 +16,17 @@ class PublishedLog extends Model
         'has_received' => 'boolean'
     ];
 
-    public function topic()
+    public function topic(): BelongsTo
     {
         return $this->belongsTo(Topic::class);
     }
 
-    public function message()
+    public function message(): belongsTo
     {
         return $this->belongsTo(PublishedMessage::class);
     }
 
-    public function subscription()
+    public function subscription(): belongsTo
     {
         return $this->belongsTo(Subscription::class);
     }
