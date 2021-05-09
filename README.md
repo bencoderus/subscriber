@@ -20,7 +20,7 @@ php artisan migrate
 
 ### Usage
 
-By default, the system seeds two random topics for testing subscription and publishing.
+By default, the system seeds some topics for testing subscription and publishing.
 
 Run Queue
 
