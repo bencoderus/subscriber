@@ -14,6 +14,8 @@ composer install
 php artisan key:generate
 ```
 
+Configure your database credentials then run,
+
 ```bash
 php artisan migrate
 ```
